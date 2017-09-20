@@ -1,0 +1,24 @@
+<div style="text-align:center">
+  <h1>
+    Cart
+  </h1>
+</div>
+
+<table>
+  <thead>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Category</th>
+      <th>IsAvailable</th>
+  </thead>
+  <tbody>
+      <tr *ngFor="let product of products">
+          <td>{{product.name}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.category}}</td>
+          <td>{{product.isAvailable}}</td>
+      </tr>
+  </tbody>
+</table>
