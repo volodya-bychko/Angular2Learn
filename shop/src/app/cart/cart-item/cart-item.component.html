@@ -1,0 +1,14 @@
+<ul>
+  <li>Name: {{item.name}}</li>
+  <li>Description: {{item.description}}</li>
+  <li>Price: {{item.price}}</li>
+  <li>Category: {{item.category}}</li>
+  <li>
+    <div>
+        <label for='quantity'>Quantity:</label>
+        <input type="number" id="quantity" #quantity  value={{item.quantity}} />
+        <button (click)="complete(quantity.value)">Ok</button>
+    </div>
+  </li>  
+  <li><button (click)="remove(item)">Remove Item</button></li>
+</ul>

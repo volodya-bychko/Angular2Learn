@@ -1,0 +1,24 @@
+<div *ngIf="items.length > 0">
+    <h2>Cart</h2>
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of items">
+                <td>{{product.name}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.price}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.quantity}}</td>
+                <td><button (click)="selectItem(product)">Edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <app-cart-item *ngIf="selectedItem" [item]="selectedItem" (changeItem)="onEditComplete($event)" (removeItem)="onRemove($event)"></app-cart-item>
+
+</div>
