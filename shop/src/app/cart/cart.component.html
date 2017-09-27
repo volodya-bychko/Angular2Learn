@@ -1,24 +1,23 @@
-<div style="text-align:center">
-  <h1>
+<div *ngIf="this.products.length > 0">
+  <h1 style="text-align:center" >
     Cart
   </h1>
-</div>
-
-<table>
-  <thead>
+  <table>
+    <thead>
       <th>Name</th>
       <th>Description</th>
       <th>Price</th>
       <th>Category</th>
       <th>IsAvailable</th>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
       <tr *ngFor="let product of products">
-          <td>{{product.name}}</td>
-          <td>{{product.description}}</td>
-          <td>{{product.price}}</td>
-          <td>{{product.category}}</td>
-          <td>{{product.isAvailable}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.isAvailable}}</td>
       </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
