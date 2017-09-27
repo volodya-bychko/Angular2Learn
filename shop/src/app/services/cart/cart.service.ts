@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CartItem } from '../../cart/cart-item'  
+import { CartItem } from '../../models/cart-item'  
 
 @Injectable()
 export class CartService {
@@ -14,7 +14,7 @@ export class CartService {
 
     if (item != null) {
       item.quantity += cartItem.quantity;
-      item.price += cartItem.price;
+      item.totalPrice += cartItem.unitPrice;
     }
     else {
       this.items.push(cartItem);
@@ -32,12 +32,10 @@ export class CartService {
   }
 
   updateCartItem(cartItem: CartItem): void {
-    var item = this.items.find(i => i.id == cartItem.id);    
-    var price = item.price / item.quantity;    
+    var item = this.items.find(i => i.id == cartItem.id);
     const index: number = this.items.indexOf(item);
     if (index !== -1) {
-      cartItem.price = price * cartItem.quantity;
-      this.items[index] = cartItem;      
+      this.items[index].totalPrice = cartItem.unitPrice * cartItem.quantity;
     }
   }
 

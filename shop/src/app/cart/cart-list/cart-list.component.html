@@ -11,7 +11,7 @@
             <tr *ngFor="let product of items">
                 <td>{{product.name}}</td>
                 <td>{{product.description}}</td>
-                <td>{{product.price}}</td>
+                <td>{{product.totalPrice}}</td>
                 <td>{{product.category}}</td>
                 <td>{{product.quantity}}</td>
                 <td><button (click)="selectItem(product)">Edit</button></td>
@@ -19,6 +19,8 @@
         </tbody>
     </table>
 
-    <app-cart-item *ngIf="selectedItem" [item]="selectedItem" (changeItem)="onEditComplete($event)" (removeItem)="onRemove($event)"></app-cart-item>
+    <app-cart-item *ngIf="selectedItem" [item]="selectedItem" (editItem)="onEditComplete($event)" (removeItem)="onRemoveComplete($event)"
+        (closeItem)="onCloseComplete($event)">
+    </app-cart-item>
 
 </div>

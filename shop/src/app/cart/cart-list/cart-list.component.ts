@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { ProductsService } from '../../products.service'
+import { ProductsService } from '../../services/product/products.service'
 import { CartService } from '../../services/cart/cart.service'
-import { CartItem } from '../cart-item'
-import { Product } from '../../product'
-import { CarCategory } from '../../car-category';
+import { CartItem } from '../../models/cart-item'
+import { Product } from '../../models/product'
+import { CarCategory } from '../../models/car-category';
 
 @Component({
   selector: 'app-cart-list',
@@ -40,32 +40,29 @@ export class CartListComponent implements OnInit, OnDestroy {
       item.description = product.description;
       item.id = product.id;
       item.quantity = 1;
-      item.price = product.price;
+      item.unitPrice = product.price;
+      item.totalPrice = product.price;
       item.category = CarCategory[product.category];
 
       return item;
   }
 
   selectItem(inputItem: CartItem){
-    var item = new CartItem();
-    item.name = inputItem.name;
-    item.description = inputItem.description;
-    item.id = inputItem.id;
-    item.quantity = inputItem.quantity;
-    item.price = inputItem.price;
-    item.category = CarCategory[inputItem.category];
-
-    this.selectedItem = item;
+    this.selectedItem = inputItem;
   }
 
-  onEditComplete(item: CartItem): void {
-    this.cartService.updateCartItem(item);
+  onEditComplete(item: CartItem) {    
+    this.cartService.updateCartItem(item);    
     this.items = this.cartService.getCartItems();
   }
 
-  onRemove(item: CartItem): void {
+  onRemoveComplete(item: CartItem) {
     this.selectedItem = null;    
     this.cartService.removeCartItem(item);
+  }
+
+  onCloseComplete(item: CartItem) {
+    this.selectedItem = null;
   }
 
 }

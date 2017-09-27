@@ -3,7 +3,8 @@ export class CartItem {
     id: number;
     name: string;
     description?: string;
-    price: number;
+    totalPrice: number;
+    unitPrice: number;
     category: string;
     quantity: number;
   }

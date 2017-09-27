@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Product } from './product'
-import { CarCategory } from './car-category'
+import { Product } from '../../models/product'
+import { CarCategory } from '../../models/car-category'
 
 @Injectable()
 export class ProductsService {
