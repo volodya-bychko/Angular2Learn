@@ -10,7 +10,7 @@ export class CartService {
   }
 
   addCartItem(cartItem: CartItem): CartItem {
-    var item = this.items.find(i => i.id == cartItem.id);
+    const item = this.items.find(i => i.id === cartItem.id);
 
     if (item != null) {
       item.quantity += cartItem.quantity;
@@ -24,7 +24,7 @@ export class CartService {
   }
 
   removeCartItem(cartItem: CartItem): void {
-    var item = this.items.find(i => i.id == cartItem.id);
+    const item = this.items.find(i => i.id === cartItem.id);
     const index: number = this.items.indexOf(item);
     if (index !== -1) {
         this.items.splice(index, 1);
@@ -32,7 +32,7 @@ export class CartService {
   }
 
   updateCartItem(cartItem: CartItem): void {
-    var item = this.items.find(i => i.id == cartItem.id);
+    const item = this.items.find(i => i.id === cartItem.id);
     const index: number = this.items.indexOf(item);
     if (index !== -1) {
       this.items[index].totalPrice = cartItem.unitPrice * cartItem.quantity;

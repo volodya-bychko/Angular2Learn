@@ -35,7 +35,7 @@ export class CartListComponent implements OnInit, OnDestroy {
   }
 
   createCartItem(product: Product): CartItem{
-      var item = new CartItem();
+      const item = new CartItem();
       item.name = product.name;
       item.description = product.description;
       item.id = product.id;
