@@ -11,5 +11,5 @@ import { ProductsService } from './services/product/products.service'
 })
 
 export class AppComponent {
-  title: string = 'Task 2'; 
+  title: string = 'Task 3'; 
 }

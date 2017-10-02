@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
-import { CartItem } from '../../models/cart-item'  
+import { Subject } from 'rxjs/Subject';
+import { CartItem } from '../../models/cart-item'
+import { CartTotals } from '../../models/cart-totals'
 
 @Injectable()
 export class CartService {
   private items: Array<CartItem>;
+  private channel = new Subject<CartTotals>();  
+  private totals: CartTotals = new CartTotals();
+
+  public channel$ = this.channel.asObservable();
 
   constructor() {
     this.items = new Array<CartItem>();
@@ -20,26 +26,46 @@ export class CartService {
       this.items.push(cartItem);
     }
 
+    this.recalculateTotals();
+
     return cartItem;
   }
 
   removeCartItem(cartItem: CartItem): void {
     const item = this.items.find(i => i.id === cartItem.id);
     const index: number = this.items.indexOf(item);
-    if (index !== -1) {
-        this.items.splice(index, 1);
+    if (index !== -1) {      
+      this.items.splice(index, 1);
+      this.recalculateTotals();
     }
   }
 
   updateCartItem(cartItem: CartItem): void {
     const item = this.items.find(i => i.id === cartItem.id);
     const index: number = this.items.indexOf(item);
-    if (index !== -1) {
+    if (index !== -1) {      
       this.items[index].totalPrice = cartItem.unitPrice * cartItem.quantity;
+      this.recalculateTotals();
     }
   }
 
-  getCartItems(): Array<CartItem> {    
+  getCartItems(): Array<CartItem> {
     return this.items;
+  }
+
+  clearCartItems() {
+    this.items.splice(0, this.items.length);
+    this.recalculateTotals();
+  }
+
+  private recalculateTotals() {
+    this.totals.totalPrice = 0;
+    this.totals.totalQuantity = 0;
+    this.items.forEach((item, index) => {
+      this.totals.totalQuantity += item.quantity;
+      this.totals.totalPrice += item.totalPrice;
+    });
+
+    this.channel.next(this.totals);
   }
 }
