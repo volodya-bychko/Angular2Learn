@@ -16,11 +16,11 @@ export class CartService {
   }
 
   addCartItem(cartItem: CartItem): CartItem {
-    const item = this.items.find(i => i.id === cartItem.id);
+    const index = this.items.findIndex(i => i.id === cartItem.id);
 
-    if (item != null) {
-      item.quantity += cartItem.quantity;
-      item.totalPrice += cartItem.unitPrice;
+    if (index !== -1) {
+      this.items[index].quantity += cartItem.quantity;
+      this.items[index].totalPrice += cartItem.unitPrice;
     }
     else {
       this.items.push(cartItem);
@@ -32,8 +32,7 @@ export class CartService {
   }
 
   removeCartItem(cartItem: CartItem): void {
-    const item = this.items.find(i => i.id === cartItem.id);
-    const index: number = this.items.indexOf(item);
+    const index: number = this.items.findIndex(i => i.id === cartItem.id);
     if (index !== -1) {      
       this.items.splice(index, 1);
       this.recalculateTotals();
@@ -41,8 +40,7 @@ export class CartService {
   }
 
   updateCartItem(cartItem: CartItem): void {
-    const item = this.items.find(i => i.id === cartItem.id);
-    const index: number = this.items.indexOf(item);
+    const index: number = this.items.findIndex(i => i.id === cartItem.id);
     if (index !== -1) {      
       this.items[index].totalPrice = cartItem.unitPrice * cartItem.quantity;
       this.recalculateTotals();
